@@ -1,17 +1,35 @@
+import { Suspense } from "react";
 import Head from "next/head";
 
-import Button from "@mui/material/Button";
+import { SearchForm } from "@/components/SearchForm";
+import { SearchResults } from "@/components/SearchResults";
+import { searchRepositories } from "@/lib/github";
 
-import SearchForm from "@/components/SearchForm";
+export async function getServerSideProps({ query }) {
+  console.log({ query });
 
-export default function Home() {
+  const results = await searchRepositories(query);
+
+  return {
+    props: {
+      query,
+      results,
+    },
+  };
+}
+
+export default function Home({ query, results }) {
+  console.log({ query });
+
   return (
     <>
       <Head>
         <title>Search Github</title>
       </Head>
       <main>
-        <SearchForm />
+        <SearchForm query={query} />
+
+        <SearchResults results={results} />
       </main>
     </>
   );
