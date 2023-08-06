@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import Head from "next/head";
 
 import { SearchForm } from "@/components/SearchForm";
@@ -19,8 +18,6 @@ export async function getServerSideProps({ query }) {
 }
 
 export default function Home({ query, results }) {
-  console.log({ query });
-
   return (
     <>
       <Head>

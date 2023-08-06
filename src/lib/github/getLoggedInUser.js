@@ -12,7 +12,14 @@ const query = `
 export const getLoggedInUser = async () => {
   const octokit = getOctokit();
 
-  const { viewer } = await octokit.graphql(query);
+  const {
+    data,
+    data: { avatar_url: avatarUrl, name, url },
+  } = await octokit.request("GET /user", {
+    headers: {
+      "X-GitHub-Api-Version": "2022-11-28",
+    },
+  });
 
-  return viewer;
+  return { avatarUrl, name, url };
 };

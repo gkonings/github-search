@@ -7,7 +7,7 @@ import { getLoggedInUser } from "@/lib/github/getLoggedInUser";
 
 export const UserInfo = (props) => {
   const [user, setUser] = useState({});
-  const { avatarUrl, login, url } = user;
+  const { avatarUrl, name, url } = user;
 
   useEffect(() => {
     const init = async () => {
@@ -21,7 +21,7 @@ export const UserInfo = (props) => {
   return (
     <Stack direction="row" spacing={2}>
       <IconButton href={url} target="_blank">
-        <Avatar alt={login} src={avatarUrl} />
+        <Avatar alt={name} src={avatarUrl} />
       </IconButton>
     </Stack>
   );
