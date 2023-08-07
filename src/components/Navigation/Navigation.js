@@ -34,8 +34,7 @@ export const Navigation = () => {
                     component={NextLink}
                     href={url}
                     variant="text"
-                    disabled={isActive}
-                    // sx={{ color: isActive ? "#000" : "red" }}
+                    sx={{ color: isActive ? "primary.main" : "grey" }}
                   >
                     {title}
                   </Button>

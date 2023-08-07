@@ -11,11 +11,12 @@ export const searchRepositories = async ({
   const octokit = getOctokit();
 
   const q = `"${search}" in:${search_in.join(",")}`;
+  console.log({ search, q });
 
   const {
     data: { items },
   } = await octokit.request(`GET /search/repositories`, {
-    q,
+    q: search,
     sort,
     order,
     per_page,
@@ -25,9 +26,30 @@ export const searchRepositories = async ({
     },
   });
 
-  return items.map(({ id, full_name, stargazers_count }) => ({
-    id,
-    fullName: full_name,
-    starCount: stargazers_count,
-  }));
+  console.log({ result: items[0] });
+
+  return items.map(
+    ({
+      description,
+      full_name,
+      id,
+      language,
+      owner,
+      stargazers_count,
+      html_url,
+      watchers_count,
+    }) => ({
+      description,
+      fullName: full_name,
+      id,
+      language,
+      owner: {
+        avatarUrl: owner.avatar_url,
+        name: owner.login,
+      },
+      starCount: stargazers_count,
+      followerCount: watchers_count,
+      url: html_url,
+    })
+  );
 };

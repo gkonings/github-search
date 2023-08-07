@@ -6,18 +6,19 @@ import { searchRepositories } from "@/lib/github";
 
 export async function getServerSideProps({ query }) {
   console.log({ query });
-
-  const results = await searchRepositories(query);
+  const hasSearch = !!query.search;
+  const results = hasSearch ? await searchRepositories(query) : [];
 
   return {
     props: {
+      hasSearch,
       query,
       results,
     },
   };
 }
 
-export default function Home({ query, results }) {
+export default function Home({ hasSearch, query, results }) {
   return (
     <>
       <Head>
@@ -26,7 +27,7 @@ export default function Home({ query, results }) {
       <main>
         <SearchForm query={query} />
 
-        <SearchResults results={results} />
+        {hasSearch && <SearchResults results={results} />}
       </main>
     </>
   );
