@@ -5,16 +5,17 @@ export const useSearchRoutes = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const setParameters = (qParams = []) => {
+  const setParameters = (state = {}) => {
     const params = new URLSearchParams(searchParams);
-    qParams.forEach(({ name, value }) => {
+
+    Object.keys(state).forEach((name) => {
+      const value = state[name];
       if (value) {
         params.set(name, value);
       } else {
         params.delete(name);
       }
     });
-
     const paramsString = params.toString();
 
     const url = `${pathname}${paramsString ? "?" : ""}${paramsString}`;

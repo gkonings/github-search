@@ -1,22 +1,35 @@
 import { getOctokit } from "./getOctokit";
 
+const createSearchString = ({
+  search,
+  language,
+  search_in = ["name", "description", "topics", "readme"],
+}) => {
+  const languageString = language ? ` language:${language}` : "";
+  const searchInString = search_in.length ? ` in:${search_in.join(",")}` : "";
+  const q = `"${search}"${languageString}${searchInString}`;
+
+  return q;
+};
+
 export const searchRepositories = async ({
   search = "",
   sort = "stars",
   order = "desc",
   per_page = 10,
   page = 1,
-  search_in = ["name"],
+  language,
+  search_in,
 }) => {
   const octokit = getOctokit();
 
-  const q = `"${search}" in:${search_in.join(",")}`;
+  const q = createSearchString({ search, language, search_in });
   console.log({ search, q });
 
   const {
     data: { items },
   } = await octokit.request(`GET /search/repositories`, {
-    q: search,
+    q,
     sort,
     order,
     per_page,
@@ -26,7 +39,7 @@ export const searchRepositories = async ({
     },
   });
 
-  console.log({ result: items[0] });
+  // console.log({ result: items[0] });
 
   return items.map(
     ({

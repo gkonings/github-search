@@ -45,10 +45,7 @@ export const SortSelect = ({ query }) => {
   };
   const handleClose = (event, option) => {
     setSelected(option);
-    setParameters([
-      { name: "sort", value: option.sort },
-      { name: "order", value: option.order },
-    ]);
+    setParameters({ sort: option.sort, order: option.order });
 
     setAnchorEl(null);
   };
@@ -56,8 +53,8 @@ export const SortSelect = ({ query }) => {
   return (
     <div>
       <Button
-        id="demo-positioned-button"
-        aria-controls={open ? "demo-positioned-menu" : undefined}
+        id="sort-button"
+        aria-controls={open ? "sort-menu" : undefined}
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
@@ -67,8 +64,8 @@ export const SortSelect = ({ query }) => {
         Sort by: <strong>{selected?.label}</strong>
       </Button>
       <Menu
-        id="demo-positioned-menu"
-        aria-labelledby="demo-positioned-button"
+        id="sort-menu"
+        aria-labelledby="sort-button"
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}

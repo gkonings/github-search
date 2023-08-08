@@ -31,7 +31,12 @@ export const SearchBar = ({ search, onChange, onReset }) => (
         ),
       }}
     />
-    <Button variant="contained" startIcon={<SearchIcon />} type="submit">
+    <Button
+      variant="contained"
+      startIcon={<SearchIcon />}
+      type="submit"
+      sx={{ px: 3 }}
+    >
       Search
     </Button>
   </Stack>
