@@ -9,7 +9,7 @@ import Tag from "./Tag";
 
 export default function Result({ result }) {
   return (
-    <Card key={result.id} variant="outlined" sx={{ px: 2, pb: 2, mb: 2 }}>
+    <Card variant="outlined" sx={{ px: 2, pb: 2, mb: 2 }}>
       <CardHeader
         avatar={
           <Avatar alt={result.owner?.name} src={result.owner?.avatarUrl} />

@@ -1,5 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { addToHistory } from "@/lib/history";
 
 export const useSearchRoutes = () => {
   const pathname = usePathname();
@@ -20,6 +21,7 @@ export const useSearchRoutes = () => {
     const paramsString = params.toString();
 
     const url = `${pathname}${paramsString ? "?" : ""}${paramsString}`;
+    addToHistory(paramsString);
     router.push(url);
   };
 

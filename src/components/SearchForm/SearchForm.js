@@ -9,15 +9,11 @@ import FilterList from "./FilterList";
 import SearchBar from "./SearchBar";
 import SortSelect from "./SortSelect";
 import { useSearchRoutes } from "@/lib/useSearchRoutes";
-
-const reducer = (prevState, updatedProperty) => ({
-  ...prevState,
-  ...updatedProperty,
-});
+import { setStateReducer } from "@/lib/utils";
 
 export default function SearchForm({ query }) {
   const { setParameters } = useSearchRoutes();
-  const [state, setState] = useReducer(reducer, { search: "" });
+  const [state, setState] = useReducer(setStateReducer, { search: "" });
   const [filterMenu, setFilterMenu] = useState(false);
 
   console.log({ state });
