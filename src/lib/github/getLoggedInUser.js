@@ -1,19 +1,10 @@
+/* eslint-disable import/prefer-default-export */
 import { getOctokit } from "./getOctokit";
-
-const query = `
-{
-  viewer {
-    login
-    avatarUrl
-    url
-  }
-}`;
 
 export const getLoggedInUser = async () => {
   const octokit = getOctokit();
 
   const {
-    data,
     data: { avatar_url: avatarUrl, name, url },
   } = await octokit.request("GET /user", {
     headers: {

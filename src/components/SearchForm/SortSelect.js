@@ -1,20 +1,10 @@
 import { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import CheckIcon from "@mui/icons-material/Check";
 
 import { useSearchRoutes } from "@/lib/useSearchRoutes";
-
-const Option = ({ onClick, isActive, children }) => {
-  return (
-    <MenuItem onClick={onClick} sx={{ pr: 2, pl: isActive ? 2 : 6 }}>
-      {isActive && <CheckIcon sx={{ mr: 1 }} />}
-      {children}
-    </MenuItem>
-  );
-};
+import SortOption from "./SortOption";
 
 const options = [
   { label: "Best match", sort: "", order: "" },
@@ -24,13 +14,10 @@ const options = [
   { label: "Fewest forks", sort: "forks", order: "asc" },
 ];
 
-const getInitialOption = ({ sort, order } = {}) => {
-  return (
-    options.find((o) => o.sort === sort && o.order === order) || options[0]
-  );
-};
+const getInitialOption = ({ sort, order } = {}) =>
+  options.find((o) => o.sort === sort && o.order === order) || options[0];
 
-export const SortSelect = ({ query }) => {
+export default function SortSelect({ query }) {
   const { setParameters } = useSearchRoutes();
   const [selected, setSelected] = useState(getInitialOption(query));
   const [anchorEl, setAnchorEl] = useState(null);
@@ -43,11 +30,15 @@ export const SortSelect = ({ query }) => {
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = (event, option) => {
+
+  const handleSelect = (_event, option) => {
+    setAnchorEl(null);
+
+    const isCurrent = selected.label === option.label;
+    if (isCurrent) return;
+
     setSelected(option);
     setParameters({ sort: option.sort, order: option.order });
-
-    setAnchorEl(null);
   };
 
   return (
@@ -68,7 +59,7 @@ export const SortSelect = ({ query }) => {
         aria-labelledby="sort-button"
         anchorEl={anchorEl}
         open={open}
-        onClose={handleClose}
+        onClose={() => setAnchorEl(null)}
         anchorOrigin={{
           vertical: "top",
           horizontal: "left",
@@ -79,15 +70,15 @@ export const SortSelect = ({ query }) => {
         }}
       >
         {options.map((option) => (
-          <Option
-            onClick={(e) => handleClose(e, option)}
+          <SortOption
+            onClick={(e) => handleSelect(e, option)}
             key={option.label}
             isActive={selected.label === option.label}
           >
             {option.label}
-          </Option>
+          </SortOption>
         ))}
       </Menu>
     </div>
   );
-};
+}

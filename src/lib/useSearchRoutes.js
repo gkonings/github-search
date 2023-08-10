@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 
 export const useSearchRoutes = () => {

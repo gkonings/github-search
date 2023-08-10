@@ -1,7 +1,7 @@
 import Head from "next/head";
 
-import { SearchForm } from "@/components/SearchForm";
-import { SearchResults } from "@/components/SearchResults";
+import SearchForm from "@/components/SearchForm";
+import SearchResults from "@/components/SearchResults";
 import { searchRepositories } from "@/lib/github";
 
 export async function getServerSideProps({ query }) {

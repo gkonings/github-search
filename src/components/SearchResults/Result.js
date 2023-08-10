@@ -5,9 +5,9 @@ import Link from "@mui/material/Link";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 
-import { Tag } from "./Tag";
+import Tag from "./Tag";
 
-export const Result = ({ result }) => {
+export default function Result({ result }) {
   return (
     <Card key={result.id} variant="outlined" sx={{ px: 2, pb: 2, mb: 2 }}>
       <CardHeader
@@ -30,4 +30,4 @@ export const Result = ({ result }) => {
       </Stack>
     </Card>
   );
-};
+}

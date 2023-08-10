@@ -1,8 +1,9 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 
 import { theme } from "@/lib/theme";
-import { Navigation } from "@/components/Navigation";
+import Navigation from "@/components/Navigation";
 
 export default function App({ Component, pageProps }) {
   return (

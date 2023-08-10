@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import { Octokit } from "octokit";
 
 export const getOctokit = () => {

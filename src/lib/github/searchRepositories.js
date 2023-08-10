@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export, camelcase */
 import { getOctokit } from "./getOctokit";
 
 const createSearchString = ({
@@ -46,7 +47,7 @@ export const searchRepositories = async ({
       description,
       full_name,
       id,
-      language,
+      language: resultLanguage,
       owner,
       stargazers_count,
       html_url,
@@ -55,7 +56,7 @@ export const searchRepositories = async ({
       description,
       fullName: full_name,
       id,
-      language,
+      language: resultLanguage,
       owner: {
         avatarUrl: owner.avatar_url,
         name: owner.login,
@@ -63,6 +64,6 @@ export const searchRepositories = async ({
       starCount: stargazers_count,
       followerCount: watchers_count,
       url: html_url,
-    })
+    }),
   );
 };

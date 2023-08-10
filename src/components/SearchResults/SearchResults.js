@@ -2,9 +2,9 @@ import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 
-import { Result } from "./Result";
+import Result from "./Result";
 
-export const SearchResults = ({ results }) => {
+export default function SearchResults({ results }) {
   if (!results.length) {
     return (
       <Container>
@@ -19,11 +19,11 @@ export const SearchResults = ({ results }) => {
     <Container>
       <Paper sx={{ p: 2, mt: -6, mb: 4 }}>
         <Stack>
-          {results.map((result) => {
-            return <Result key={result.id} result={result} />;
-          })}
+          {results.map((result) => (
+            <Result key={result.id} result={result} />
+          ))}
         </Stack>
       </Paper>
     </Container>
   );
-};
+}

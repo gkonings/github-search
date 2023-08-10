@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import IconButton from "@mui/material/IconButton";
 
 import { getLoggedInUser } from "@/lib/github/getLoggedInUser";
 
-export const UserInfo = (props) => {
+export default function UserInfo() {
   const [user, setUser] = useState({});
   const { avatarUrl, name, url } = user;
 
@@ -25,4 +25,4 @@ export const UserInfo = (props) => {
       </IconButton>
     </Stack>
   );
-};
+}

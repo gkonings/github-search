@@ -1,4 +1,3 @@
-import React from "react";
 import NextLink from "next/link";
 import { usePathname } from "next/navigation";
 import AppBar from "@mui/material/AppBar";
@@ -7,10 +6,10 @@ import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 
-import { UserInfo } from "./UserInfo";
+import UserInfo from "./UserInfo";
 import { pages } from "./pages";
 
-export const Navigation = () => {
+export default function Navigation() {
   const pathname = usePathname();
 
   return (
@@ -48,4 +47,4 @@ export const Navigation = () => {
       </Container>
     </AppBar>
   );
-};
+}

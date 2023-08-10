@@ -11,14 +11,20 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@fontsource/roboto": "^5.0.7",
+    "@fontsource/roboto": "^5.0.8",
     "@mui/icons-material": "^5.14.3",
-    "@mui/material": "^5.14.3",
-    "eslint": "8.46.0",
-    "eslint-config-next": "13.4.12",
-    "next": "13.4.12",
+    "@mui/material": "^5.14.4",
+    "next": "13.4.13",
     "octokit": "^3.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "eslint": "8.46.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-next": "13.4.13",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "prettier": "^3.0.1"
   }
 }
