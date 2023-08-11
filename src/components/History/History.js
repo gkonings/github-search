@@ -14,12 +14,11 @@ export default function History() {
   }, []);
 
   if (history.length > 0) {
-    console.log({ history });
-
     return (
       <ResultsContainer>
-        {history.map((paramsString) => (
-          <Item key={paramsString} paramsString={paramsString} />
+        {history.map((paramsString, i) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <Item key={i} paramsString={paramsString} />
         ))}
       </ResultsContainer>
     );

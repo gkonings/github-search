@@ -5,18 +5,24 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Collapse from "@mui/material/Collapse";
 
-import FilterList from "./FilterList";
+import ActiveFilterList from "./ActiveFilterList";
+import Filters from "./Filters";
 import SearchBar from "./SearchBar";
 import SortSelect from "./SortSelect";
 import { useSearchRoutes } from "@/lib/useSearchRoutes";
 import { setStateReducer } from "@/lib/utils";
 
+const defaultState = {
+  search: "",
+  language: "",
+  stars: "",
+  followers: "",
+};
+
 export default function SearchForm({ query }) {
   const { setParameters } = useSearchRoutes();
-  const [state, setState] = useReducer(setStateReducer, { search: "" });
+  const [state, setState] = useReducer(setStateReducer, defaultState);
   const [filterMenu, setFilterMenu] = useState(false);
-
-  console.log({ state });
 
   useEffect(() => {
     setState(query);
@@ -27,9 +33,9 @@ export default function SearchForm({ query }) {
     setParameters(state);
   };
 
-  const handleReset = () => {
-    setState({ search: "" });
-    setParameters({ search: "" });
+  const handleReset = (field) => {
+    setState({ [field]: "" });
+    setParameters({ [field]: "" });
   };
 
   return (
@@ -48,8 +54,8 @@ export default function SearchForm({ query }) {
           />
 
           <Stack direction="row" justifyContent="space-between" sx={{ my: 1 }}>
-            <FilterList
-              state={state}
+            <ActiveFilterList
+              query={query}
               setState={setState}
               toggleFilterMenu={() => setFilterMenu(!filterMenu)}
             />
@@ -57,7 +63,7 @@ export default function SearchForm({ query }) {
           </Stack>
 
           <Collapse in={filterMenu} collapsedSize={0}>
-            rest
+            <Filters state={state} setState={setState} onReset={handleReset} />
           </Collapse>
         </Container>
       </Box>

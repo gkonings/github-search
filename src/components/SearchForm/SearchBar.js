@@ -25,7 +25,11 @@ export default function SearchBar({ search, onChange, onReset }) {
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              <IconButton aria-label="reset" onClick={onReset} edge="end">
+              <IconButton
+                aria-label="reset"
+                onClick={() => onReset("search")}
+                edge="end"
+              >
                 {!!search && <CancelIcon />}
               </IconButton>
             </InputAdornment>

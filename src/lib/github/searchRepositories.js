@@ -4,28 +4,24 @@ import { getOctokit } from "./getOctokit";
 const createSearchString = ({
   search,
   language,
+  stars,
+  followers,
   search_in = ["name", "description", "topics", "readme"],
 }) => {
-  const languageString = language ? ` language:${language}` : "";
+  const starsString = stars ? ` stars:${stars}` : "";
+  const followersString = followers ? ` followers:${followers}` : "";
+  const languageString = followers ? ` language:${language}` : "";
   const searchInString = search_in.length ? ` in:${search_in.join(",")}` : "";
-  const q = `"${search}"${languageString}${searchInString}`;
+  const q = `"${search}"${starsString}${followersString}${languageString}${searchInString}`;
 
   return q;
 };
 
-export const searchRepositories = async ({
-  search = "",
-  sort = "stars",
-  order = "desc",
-  per_page = 10,
-  page = 1,
-  language,
-  search_in,
-}) => {
+export const searchRepositories = async (query) => {
+  const { sort = "stars", order = "desc", per_page = 10, page = 1 } = query;
   const octokit = getOctokit();
 
-  const q = createSearchString({ search, language, search_in });
-  console.log({ search, q });
+  const q = createSearchString(query);
 
   const {
     data: { items },
@@ -40,30 +36,5 @@ export const searchRepositories = async ({
     },
   });
 
-  // console.log({ result: items[0] });
-
-  return items.map(
-    ({
-      description,
-      full_name,
-      id,
-      language: resultLanguage,
-      owner,
-      stargazers_count,
-      html_url,
-      watchers_count,
-    }) => ({
-      description,
-      fullName: full_name,
-      id,
-      language: resultLanguage,
-      owner: {
-        avatarUrl: owner.avatar_url,
-        name: owner.login,
-      },
-      starCount: stargazers_count,
-      followerCount: watchers_count,
-      url: html_url,
-    }),
-  );
+  return items;
 };

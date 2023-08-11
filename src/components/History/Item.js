@@ -5,20 +5,7 @@ import Link from "@mui/material/Link";
 import Chip from "@mui/material/Chip";
 import Typography from "@mui/material/Typography";
 
-const getValue = ({ key, params }) => {
-  if (key !== "sort") {
-    return params[key];
-  }
-
-  if (params.order === "desc") {
-    return `most ${params[key]}`;
-  }
-  if (params.order === "asc") {
-    return `fewest ${params[key]}`;
-  }
-
-  return null;
-};
+import { getTagValue } from "@/lib/utils";
 
 export default function Item({ paramsString }) {
   const params = Object.fromEntries(new URLSearchParams(paramsString));
@@ -34,9 +21,15 @@ export default function Item({ paramsString }) {
           </Link>
         }
       />
-      <Stack direction="row" sx={{ px: 1 }}>
+      <Stack
+        direction="row"
+        sx={{ px: 1 }}
+        spacing={1}
+        useFlexGap
+        flexWrap="wrap"
+      >
         {["language", "stars", "followers", "sort"].map((key) => {
-          const value = getValue({ key, params });
+          const value = getTagValue({ key, params });
           if (!value) return null;
 
           return (
@@ -47,7 +40,6 @@ export default function Item({ paramsString }) {
                   {key}: <strong>{value}</strong>
                 </span>
               }
-              sx={{ mr: 1 }}
             />
           );
         })}

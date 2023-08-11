@@ -12,11 +12,11 @@ export default function Result({ result }) {
     <Card variant="outlined" sx={{ px: 2, pb: 2, mb: 2 }}>
       <CardHeader
         avatar={
-          <Avatar alt={result.owner?.name} src={result.owner?.avatarUrl} />
+          <Avatar alt={result.owner?.login} src={result.owner?.avatar_url} />
         }
         title={
-          <Link href={result.url}>
-            <Typography variant="body1">{result.fullName}</Typography>
+          <Link href={result.html_url}>
+            <Typography variant="body1">{result.full_name}</Typography>
           </Link>
         }
         subheader={
@@ -25,8 +25,7 @@ export default function Result({ result }) {
       />
       <Stack direction="row">
         <Tag name="language" value={result.language} />
-        <Tag name="stars" value={result.starCount} />
-        <Tag name="followers" value={result.followerCount} />
+        <Tag name="stars" value={result.stargazers_count} />
       </Stack>
     </Card>
   );
