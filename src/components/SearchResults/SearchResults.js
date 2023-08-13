@@ -12,15 +12,29 @@ export default function SearchResults({ query }) {
   const [state, setState] = useReducer(setStateReducer, {
     isLoading: false,
     results: [],
+    errorMessage: null,
   });
-  const { isLoading, results } = state;
-  const hasSearch = !!query.search;
+  const { isLoading, results, errorMessage } = state;
+  const hasSearch = !!query?.search;
 
   useEffect(() => {
     const getResults = async () => {
       setState({ isLoading: true });
-      const searchResult = await searchRepositories(query);
-      setState({ isLoading: false, results: searchResult });
+      try {
+        const searchResult = await searchRepositories(query);
+        setState({
+          isLoading: false,
+          results: searchResult,
+          errorMessage: null,
+        });
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error("Github error :", error?.message);
+        const message =
+          "Something went wrong trying to fetch results. Check the console logs for more information";
+
+        setState({ isLoading: false, errorMessage: message, results: [] });
+      }
     };
 
     if (hasSearch) {
@@ -31,7 +45,7 @@ export default function SearchResults({ query }) {
 
   if (!hasSearch) {
     return (
-      <ContentContainer>
+      <ContentContainer testId="welcome-screen">
         Try typing a keyword, and see if github has something for you.
       </ContentContainer>
     );
@@ -39,10 +53,14 @@ export default function SearchResults({ query }) {
 
   if (isLoading) {
     return (
-      <ResultsContainer>
+      <ResultsContainer testId="result-is-loading">
         <Skeleton variant="rounded" height={90} sx={{ px: 2, pb: 2 }} />
       </ResultsContainer>
     );
+  }
+
+  if (errorMessage) {
+    return <ContentContainer testId="error">{errorMessage}</ContentContainer>;
   }
 
   if (results.length > 0) {
@@ -56,7 +74,7 @@ export default function SearchResults({ query }) {
   }
 
   return (
-    <ContentContainer>
+    <ContentContainer testId="no-result">
       There seems to be no results for <strong>{query.search}</strong>. Are you
       sure you spelled it correct?
     </ContentContainer>

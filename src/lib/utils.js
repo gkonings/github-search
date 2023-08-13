@@ -4,7 +4,7 @@ export const setStateReducer = (prevState, updatedProperty) => ({
   ...updatedProperty,
 });
 
-export const getTagValue = ({ key, params }) => {
+export const getTagValue = ({ key, params = {} }) => {
   const value = params[key];
 
   if (!value) return null;

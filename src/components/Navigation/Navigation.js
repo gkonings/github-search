@@ -6,7 +6,6 @@ import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 
-import UserInfo from "./UserInfo";
 import { pages } from "./pages";
 
 export default function Navigation() {
@@ -40,8 +39,6 @@ export default function Navigation() {
                 );
               })}
             </Stack>
-
-            <UserInfo />
           </Stack>
         </Toolbar>
       </Container>

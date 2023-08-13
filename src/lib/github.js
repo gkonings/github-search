@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export, camelcase */
-import { getOctokit } from "./getOctokit";
+import { Octokit } from "octokit";
 
 const createSearchString = ({
   search,
@@ -8,18 +8,26 @@ const createSearchString = ({
   followers,
   search_in = ["name", "description", "topics", "readme"],
 }) => {
-  const starsString = stars ? ` stars:${stars}` : "";
-  const followersString = followers ? ` followers:${followers}` : "";
-  const languageString = followers ? ` language:${language}` : "";
-  const searchInString = search_in.length ? ` in:${search_in.join(",")}` : "";
-  const q = `"${search}"${starsString}${followersString}${languageString}${searchInString}`;
+  const starsString = stars ? `stars:${stars}` : false;
+  const followersString = followers ? `followers:${followers}` : false;
+  const languageString = followers ? `language:${language}` : false;
+  const searchInString = search_in.length ? `in:${search_in.join(",")}` : false;
+
+  const q = `"${search}" ${[
+    starsString,
+    followersString,
+    languageString,
+    searchInString,
+  ]
+    .filter(Boolean)
+    .join(" ")}`;
 
   return q;
 };
 
 export const searchRepositories = async (query) => {
   const { sort = "stars", order = "desc", per_page = 10, page = 1 } = query;
-  const octokit = getOctokit();
+  const octokit = new Octokit();
 
   const q = createSearchString(query);
 

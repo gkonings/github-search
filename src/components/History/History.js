@@ -25,7 +25,7 @@ export default function History() {
   }
 
   return (
-    <ContentContainer>
+    <ContentContainer testId="no-history">
       It seems you don&apos;t have a history yet. Try{" "}
       <NextLink href="/">searching</NextLink> something first.
     </ContentContainer>

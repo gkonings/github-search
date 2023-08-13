@@ -12,12 +12,14 @@ export const useSearchRoutes = () => {
 
     Object.keys(state).forEach((name) => {
       const value = state[name];
+
       if (value) {
         params.set(name, value);
       } else {
         params.delete(name);
       }
     });
+
     const paramsString = params.toString();
 
     const url = `${pathname}${paramsString ? "?" : ""}${paramsString}`;

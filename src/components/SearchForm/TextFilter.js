@@ -16,6 +16,10 @@ export default function TextFilter({ name, value, setState }) {
           <InputAdornment position="start">{name}:</InputAdornment>
         ),
       }}
+      // eslint-disable-next-line react/jsx-no-duplicate-props
+      inputProps={{
+        "data-testid": `filter-${name}`,
+      }}
     />
   );
 }

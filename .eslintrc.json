@@ -1,9 +1,14 @@
 {
   "extends": ["next/core-web-vitals", "airbnb", "prettier"],
+  "plugins": ["jest"],
+  "env": {
+    "jest/globals": true
+  },
   "rules": {
     "react/react-in-jsx-scope": "off",
     "react/jsx-uses-react": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "import/no-extraneous-dependencies": [0],
     "import/extensions": [0],
     "import/no-unresolved": [0],
     "react/prop-types": [0]
