@@ -10,7 +10,7 @@ const createSearchString = ({
 }) => {
   const starsString = stars ? `stars:${stars}` : false;
   const followersString = followers ? `followers:${followers}` : false;
-  const languageString = followers ? `language:${language}` : false;
+  const languageString = language ? `language:${language}` : false;
   const searchInString = search_in.length ? `in:${search_in.join(",")}` : false;
 
   const q = `"${search}" ${[
