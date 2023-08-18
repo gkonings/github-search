@@ -26,6 +26,20 @@ describe("useSearchRoutes: setParameters", () => {
     expect(push).toBeCalledWith("mock-pathname/?search=react");
   });
 
+  it("adds numbers to route", () => {
+    const { setParameters } = useSearchRoutes();
+    setParameters({ search: "react", stars: ">3" });
+
+    expect(push).toBeCalledWith("mock-pathname/?search=react&stars=%3E3");
+  });
+
+  it("ignores invalid numbers", () => {
+    const { setParameters } = useSearchRoutes();
+    setParameters({ search: "react", stars: ">" });
+
+    expect(push).toBeCalledWith("mock-pathname/?search=react");
+  });
+
   it("adds params to history", () => {
     const { setParameters } = useSearchRoutes();
     setParameters({ search: "react" });
